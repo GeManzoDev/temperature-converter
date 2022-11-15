@@ -21,7 +21,7 @@
         </option>
       </select>
       <button class="button" @click="convert">Convert</button>
-      <span class="result">{{ result }}</span>
+      <span class="result">{{ result }} </span>
     </div>
   </div>
 </template>
@@ -56,16 +56,29 @@ export default {
           ? (this.result = this.degrees + 273.15)
           : // fahreneit to kelvin
           this.starterScale == 2 && this.finalScale == 3
-          ? this.degrees * (5 / 9) + 459.67
+          ? (this.result = parseFloat(this.degrees * (5 / 9) + 459.67).toFixed(
+              2
+            ))
           : // fahreneit to celsius
           this.starterScale == 2 && this.finalScale == 1
-          ? (this.result = ((this.degrees - 32) * 5) / 9)
+          ? (this.result = parseFloat((this.degrees - 32) * (5 / 9)).toFixed(2))
           : // kelvin to celsius
           this.starterScale == 3 && this.finalScale == 1
           ? (this.result = this.degrees - 273.15)
           : // kelvin to fahrenheit
             (this.result = ((this.degrees - 273.15) * 5) / 9 + 32);
       } else alert('Please insert scale');
+      {
+        {
+          this.finalScale == 1
+            ? (this.result += ' °C')
+            : this.finalScale == 2
+            ? (this.result += ' °F')
+            : this.finalScale == 3
+            ? (this.result += ' °K')
+            : this.result;
+        }
+      }
     },
   },
 };
@@ -121,17 +134,43 @@ h1 {
 .result {
   margin-top: 2rem;
   font-weight: 600;
-  font-size: 50px;
+  font-size: 60px;
 }
 #degrees {
   width: 60px;
+  padding-top: 5px;
   text-align: center;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
 }
+#degrees:focus {
+  outline: none;
+}
+
 #scale {
   padding: 5px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+}
+#scale:focus {
+  outline: none;
 }
 #finalScale {
   padding: 5px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+}
+#finalScale:focus {
+  outline: none;
 }
 label {
   margin-bottom: 10px;
