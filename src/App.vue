@@ -3,12 +3,22 @@
   <div class="container">
     <div class="inputField">
       <label for="degrees">Degrees</label>
-      <input v-model="degrees" type="number" name="degrees" id="degrees" />
+      <input
+        v-model="degrees"
+        type="number"
+        name="degrees"
+        id="degrees"
+        @keydown.enter="convert"
+      />
     </div>
     <div class="scaleField">
       <label for="scales">Scale</label>
       <select v-model="starterScale" name="scales" id="scale">
-        <option v-for="scale in scales" :value="scale.id">
+        <option
+          v-for="scale in scales"
+          :value="scale.id"
+          @keydown.enter="convert"
+        >
           {{ scale.name }}
         </option>
       </select>
@@ -16,13 +26,19 @@
     <div class="finalScaleField">
       <label for="finalScale">To:</label>
       <select v-model="finalScale" name="finalScale" id="finalScale">
-        <option v-for="scale in scales" :value="scale.id">
+        <option
+          v-for="scale in scales"
+          :value="scale.id"
+          @keydown.enter="convert"
+        >
           {{ scale.name }}
         </option>
       </select>
-      <button class="button" @click="convert">Convert</button>
-      <span class="result">{{ result }} </span>
     </div>
+    <button class="button" @click="convert">
+      <span>Convert</span>
+    </button>
+    <span class="result">{{ result }} </span>
   </div>
 </template>
 
@@ -111,7 +127,7 @@ h1 {
   margin: auto;
   margin-top: 4rem;
   box-shadow: 5px 8px 7px -2px rgba(0, 0, 0, 0.67);
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .inputField {
   display: flex;
@@ -132,7 +148,7 @@ h1 {
   margin: 0.5rem;
 }
 .result {
-  margin-top: 2rem;
+  margin: 2rem;
   font-weight: 600;
   font-size: 60px;
 }
@@ -240,7 +256,26 @@ label {
   top: 0px;
   left: 0px;
   background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACuklEQVRIidWVzWtUZxTGf/cyaosiWEsy98FK4wwljElmJkEQC4FgWroopeKqkFQXLly4KIJCu4ofuHEXdfwDtK4cFCYFYw3YIthQJKNkZsQvBDN3EtNGBdNkJjrHRT7sgGLu2E0vXDi85/Kc5/3dwzkO/8EjaSXQDXwKPASu+L5fAXDeV9zzvGbHcdJA7F/HeWCn7/u330tcUrOkYiwet/7ML3ZpzLf+zIDF2tpMUm7hZvU7l1RqSSYtnSvYcHlu6e3PDJgkk/SVW6d4zHGcoY8aG8N9Z35mQzRak/8smVwMNwUuIKnZcZxf1zU06NDZc3wSjRK6dqPmmzsjI4vhg6DOa7HMlC17OGX5pm67MfSHDZfnLJ0rWCweD/4PPM+LSSq2JJN2fjRvw7OVJfHsoVM2PFuxdC5vLcl2k1SU1BzUeXFzIjHvfLZi2SOnX4vPlC2dL1hre7tJKtUj/kYs2cOpeef5gm1OJOpyviwsC86LkmLvVv3fYgmHw0hql/TDu7CcHw2IRdLHkjKSXkqy1o6Ot2PJFRZbcXlYJK2RNNIUidhPJ1M2WPTnZ8qbsOSCd0sI2Oe6buLAqdN0dHYSGryGW5rELU6w4twAld07KB/cw6N79+jr7eHJ48c+8MVyR3EI6G3dto2Ori5WHU2x8mxmKTn33deUD+5h7P59+np7mJoYHwe2B5nzLhCNtsUBWJG+XJOsbmgE16Xv+x6mJsZ9oCvoEnGBf6afPQPA1FBbQA08nZzk71IJ4Hg9G8oFfv9z6Aoz09PMHttPNbIR+/ADKj3f8OLLz/nt4gWAKnA1qDgAkrZKmvt21267OvWkZjOlLg1aUyRikjKe59Wl73ieh+M4e4ET68Ph0Jbt3axeu5a7t24yev061Wo1y3zX/FVXAYCFIluBH4FOYA1wBzgDnPR9/3ld9oFX0qjtbrSC+hUAAAAASUVORK5CYII=')
-    no-repeat left center transparent;
+    no-repeat center center transparent;
   background-size: 100% 100%;
+}
+@media screen and (max-width: 540px) {
+  .container {
+    width: 70vw;
+  }
+  .button {
+    height: 35px;
+    width: 15px;
+  }
+  .button span {
+    display: none;
+  }
+  .button::before {
+    top: -7px;
+    left: -6px;
+  }
+  .result {
+    font-size: 30px;
+  }
 }
 </style>
